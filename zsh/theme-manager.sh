@@ -59,15 +59,4 @@ rate_theme() {
 # Step 5: Run the rating function on shell exit
 trap rate_theme EXIT
 
-# Optional: Review and Edit Preferences
-edit_preferences() {
-    echo "Select a theme to re-categorize:"
-    select theme in $(cat "$PREFERENCE_FILE" | cut -d '=' -f 1); do
-        rate_theme "$theme"
-        break
-    done
-}
 
-# If you want to trigger editing preferences manually, you could call the function here
-# Uncomment the following line to enable manual editing at the start
-# edit_preferences
