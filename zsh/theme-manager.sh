@@ -7,12 +7,17 @@ LOG_FILE=~/.zsh_theme_log
 # Step 1: Capture the current loaded theme
 CURRENT_THEME=$(echo $RANDOM_THEME)
 
-# Initialize the preferences file if it doesn't exist
+# Step 2: Initialize the preferences file if it doesn't exist
 if [ ! -f "$PREFERENCE_FILE" ]; then
     touch "$PREFERENCE_FILE"
 fi
 
-# Function to prompt rating on shell exit
+# Step 3: Initialize the log file if it doesn't exist
+if [ ! -f "$LOG_FILE" ]; then
+    touch "$LOG_FILE"
+fi
+
+# Step 4: Function to prompt rating on shell exit
 rate_theme() {
     echo "Rate the theme '$CURRENT_THEME':"
     echo "1. Pass (Like it)"
@@ -42,17 +47,16 @@ rate_theme() {
             ;;
     esac
 
-    # Step 3: Check if all themes are categorized (excluding "Not Sure")
+    # Check if all themes are categorized (excluding "Not Sure")
     ALL_THEMES=( $(ls $ZSH/themes | sed 's/\.zsh-theme$//') )  # List all available themes
-    LIKED_THEMES=( $(grep '=LIKED' "$PREFERENCE_FILE" | cut -d '=' -f 1) )
-    DISLIKED_THEMES=( $(grep '=DISLIKED' "$PREFERENCE_FILE" | cut -d '=' -f 1) )
+    CATEGORIZED_THEMES=( $(cut -d '=' -f 1 "$PREFERENCE_FILE") )
 
-    if [ $((${#LIKED_THEMES[@]} + ${#DISLIKED_THEMES[@]})) -eq ${#ALL_THEMES[@]} ]; then
+    if [ ${#CATEGORIZED_THEMES[@]} -eq ${#ALL_THEMES[@]} ]; then
         echo "All Zsh themes have been cycled through and categorized!"
     fi
 }
 
-# Step 4: Run the rating function on shell exit
+# Step 5: Run the rating function on shell exit
 trap rate_theme EXIT
 
 # Optional: Review and Edit Preferences
