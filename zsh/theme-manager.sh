@@ -5,7 +5,7 @@ PREFERENCE_FILE=~/.zsh_theme_preferences
 LOG_FILE=~/.zsh_theme_log
 
 # Step 1: Capture the current loaded theme
-CURRENT_THEME=$(grep '^ZSH_THEME=' ~/.zshrc | cut -d '"' -f 2)
+CURRENT_THEME=$(echo $RANDOM_THEME)
 
 # Initialize the preferences file if it doesn't exist
 if [ ! -f "$PREFERENCE_FILE" ]; then
@@ -16,7 +16,7 @@ fi
 rate_theme() {
     echo "Rate the theme '$CURRENT_THEME':"
     echo "1. Pass (Like it)"
-    echo "2. Don't Like"
+    echo "2. Don't Like" 
     echo "3. Not Sure (Decide Later)"
     read -p "Select an option (1/2/3): " rating
     
