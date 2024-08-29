@@ -1,32 +1,29 @@
-#!/bin/bash
-
 # Define the file paths for preferences and logs
 PREFERENCE_FILE=~/.zsh_theme_preferences
 LOG_FILE=~/.zsh_theme_log
 
-# Step 1: Capture the current loaded theme
-CURRENT_THEME=$(echo $RANDOM_THEME)
-
-# Step 2: Initialize the preferences file if it doesn't exist
+# Initialize the preferences file if it doesn't exist
 if [ ! -f "$PREFERENCE_FILE" ]; then
     touch "$PREFERENCE_FILE"
 fi
 
-# Step 3: Initialize the log file if it doesn't exist
+# Initialize the log file if it doesn't exist
 if [ ! -f "$LOG_FILE" ]; then
     touch "$LOG_FILE"
 fi
 
-# Step 4: Function to prompt rating on shell exit
+# Function to prompt rating on shell exit
 rate_theme() {
+    # Capture the current loaded theme
+    CURRENT_THEME=$(echo $RANDOM_THEME)
+    
     echo "Rate the theme '$CURRENT_THEME':"
     echo "1. Pass (Like it)"
     echo "2. Don't Like" 
     echo "3. Not Sure (Decide Later)"
-    
     # Read user input and store it in the 'rating' variable
-    read -p "Select an option (1/2/3): " rating
-    
+    read  "rating?Select from options 1----2----3: "     
+        
     # Remove any existing entry for the current theme
     sed -i "/^$CURRENT_THEME/d" "$PREFERENCE_FILE"
 
@@ -56,12 +53,10 @@ rate_theme() {
     if [ ${#CATEGORIZED_THEMES[@]} -eq ${#ALL_THEMES[@]} ]; then
         echo "All Zsh themes have been cycled through and categorized!"
     fi
-
+    
     # Pause before allowing the terminal to close
-    read -p "Press any key to close the terminal..."
+    read "?$CURRENT_THEME=LIKED added to .zsh_theme_log ---> Press Enter to close the terminal..."
 }
 
-# Step 5: Trap the EXIT signal to run the rate_theme function before the terminal closes
+# Trap the EXIT signal to run the rate_theme function before the terminal closes
 trap rate_theme EXIT
-
-
