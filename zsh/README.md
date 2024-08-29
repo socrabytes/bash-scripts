@@ -6,7 +6,7 @@ This directory contains scripts related to Zsh customization and management.
 
 ### Overview
 
-`theme-manager.sh` is a Bash script designed to help manage and categorize Zsh themes automatically. This script is particularly useful for users who have just installed Oh My Zsh and set their `ZSH_THEME="random"`, which shuffles through different themes each time a new shell instance is opened. The script captures the currently loaded theme and, upon exiting the shell, prompts the user to categorize the theme as "Liked" or "Disliked." It will continue running until all available themes have been categorized.
+`theme-manager.sh` is a shell `.zsh` script designed to help manage and categorize Zsh themes automatically. This script is particularly useful for users who have just installed Oh My Zsh and set their `ZSH_THEME="random"`, which shuffles through different themes each time a new shell instance is opened. The script captures the currently loaded theme and, upon exiting the shell, prompts the user to categorize the theme as "Liked" or "Disliked." It will continue running until all available themes have been categorized.
 
 ### Features
 
@@ -18,12 +18,13 @@ This directory contains scripts related to Zsh customization and management.
 
 ### Installation and Setup
 
-1. **Make the script executable** (if it’s not already):
+1. **(Optional) Make the script executable**:
    ```bash
    chmod +x /path/to/theme-manager.sh
    ```
+   This step is only necessary if you plan to run the script directly, but it's not required if you're sourcing it in .zshrc.
 
-2. **Add the following line to your `.zshrc`** to run the script automatically when you start and exit your shell sessions:
+2. **Add the following line to your `.zshrc`** to source the script automatically when you start and exit your shell sessions:
    ```bash
    source /path/to/theme-manager.sh
    ```
