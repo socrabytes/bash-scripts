@@ -13,41 +13,34 @@ This directory contains scripts related to Zsh customization and management.
 - **Automatic Theme Detection**: Captures the currently loaded theme by checking the `$RANDOM_THEME` variable when you start your shell session.
 - **User Prompt on Exit**: Prompts you to categorize the theme when you exit your shell session.
 - **Theme Categorization**: Allows you to mark themes as "Liked" or "Disliked," and keeps track of your preferences.
+- **Logging**: Records each theme rating along with the date and time to a log file (`~/.zsh_theme_log`).
 - **Completion Notification**: Notifies you when all themes have been categorized, allowing you to set `ZSH_THEME_RANDOM_CANDIDATES` to cycle only through your liked themes.
+
+### Installation and Setup
+
+1. **Make the script executable** (if it’s not already):
+   ```bash
+   chmod +x /path/to/theme-manager.sh
+   ```
+
+2. **Add the following line to your `.zshrc`** to run the script automatically when you start and exit your shell sessions:
+   ```bash
+   source /path/to/theme-manager.sh
+   ```
+
+3. **Ensure your `.zshrc` has the following settings**:
+   ```bash
+   ZSH_THEME="random"
+   ```
 
 ### Usage
 
-1. **Setup**:
-   - Ensure the script is executable and sourced in your `.zshrc` to run automatically when you start and exit your shell sessions.
-   - Add the following line to your `.zshrc`:
-     ```bash
-     source ~/Code-Ubuntu/bash-scripts/zsh/theme-manager.sh
-     ```
-   - Ensure your `.zshrc` has the following settings:
-     ```bash
-     ZSH_THEME="random"
-     # ZSH_THEME_RANDOM_CANDIDATES=()  # Optional: Will be used once you have categorized all themes
-     ```
-
-2. **Running the Script**:
-   - The script runs automatically each time you start and exit your shell.
-   - When you close the shell, you will be prompted to categorize the current theme.
-
-3. **Categorization**:
-   - **Liked**: Marks the theme as a favorite and stores it in the list of "Liked" themes.
-   - **Disliked**: Marks the theme as not preferred and stores it in the list of "Disliked" themes.
-
-4. **Completion**:
-   - Once all themes have been categorized, the script will notify you that all themes have been reviewed.
-   - You can then edit your `.zshrc` to include only your liked themes:
-     ```bash
-     ZSH_THEME_RANDOM_CANDIDATES=( "theme1" "theme2" "theme3" )
-     ZSH_THEME="random"
-     ```
-
-### Configuration
-
-- **Preferences File**: The script stores your theme preferences in `~/.zsh_theme_preferences`. You can manually edit this file if needed, though it's recommended to let the script manage it.
+1. **Start a new terminal session**: The script will automatically capture the currently loaded random theme.
+2. **Rate the theme**: Upon exiting the shell, you’ll be prompted to categorize the current theme:
+    - `1` for "Pass (Like it)"
+    - `2` for "Don't Like"
+    - `3` for "Not Sure (Decide Later)"
+3. **View Logs**: Your ratings are logged in `~/.zsh_theme_log`. You can view this file to see a history of your theme ratings.
 
 ### Example Workflow
 
@@ -57,11 +50,19 @@ This directory contains scripts related to Zsh customization and management.
 4. When you exit the terminal, the script prompts you to categorize the theme as "Liked" or "Disliked."
 5. The script logs your preference and prepares for the next session.
 6. Once all themes are categorized, update your `.zshrc` to only include the themes you like.
+   ```bash
+   ZSH_THEME_RANDOM_CANDIDATES=( "theme1" "theme2" "theme3" )
+   ```
+
+### Configuration
+- **Preferences File**: The script stores your theme preferences in `~/.zsh_theme_preferences`. You can manually edit this file if needed, though it's recommended to let the script manage it.
+- **Log File**: The script logs each theme rating with a timestamp in `~/.zsh_theme_log`. This log file provides a historical record of when and how you rated each theme. You can refer to this file if you want to review your past decisions or troubleshoot any issues with theme categorization.
 
 ### Future Enhancements
 
-- Adding a feature to revisit and change theme preferences after initial categorization.
-- Integrating with Zsh theme frameworks for more advanced theme management.
+- [ ] Add a feature to automatically configure `ZSH_THEME_RANDOM_CANDIDATES` in `.zshrc` with all themes marked as "Liked" in the `.zsh_theme_preferences` file. This would allow the shell to randomly cycle through only your preferred themes.
+
+---
 
 ### Troubleshooting
 
