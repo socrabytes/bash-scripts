@@ -23,6 +23,8 @@ rate_theme() {
     echo "1. Pass (Like it)"
     echo "2. Don't Like" 
     echo "3. Not Sure (Decide Later)"
+    
+    # Read user input and store it in the 'rating' variable
     read -p "Select an option (1/2/3): " rating
     
     # Remove any existing entry for the current theme
@@ -54,9 +56,12 @@ rate_theme() {
     if [ ${#CATEGORIZED_THEMES[@]} -eq ${#ALL_THEMES[@]} ]; then
         echo "All Zsh themes have been cycled through and categorized!"
     fi
+
+    # Pause before allowing the terminal to close
+    read -p "Press any key to close the terminal..."
 }
 
-# Step 5: Run the rating function on shell exit
+# Step 5: Trap the EXIT signal to run the rate_theme function before the terminal closes
 trap rate_theme EXIT
 
 
