@@ -18,11 +18,11 @@ rate_theme() {
     CURRENT_THEME=$(echo $RANDOM_THEME)
     
     echo "Rate the theme '$CURRENT_THEME':"
-    echo "1. Pass (Like it)"
+    echo "1. Like"
     echo "2. Don't Like" 
-    echo "3. Not Sure (Decide Later)"
+    echo "3. Not Sure <---- Decide Later"
     # Read user input and store it in the 'rating' variable
-    read  "rating?Select from options 1----2----3: "     
+    read  "rating?Choose 1-3 [3]: "     
         
     # Remove any existing entry for the current theme
     sed -i "/^$CURRENT_THEME/d" "$PREFERENCE_FILE"
